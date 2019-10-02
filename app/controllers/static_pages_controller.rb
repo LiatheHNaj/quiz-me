@@ -1,4 +1,43 @@
 class StaticPagesController < ApplicationController
+
+  def picChooser
+    respond_to do |format|
+      format.html { render :picChooser}
+    end
+  end
+
+  def chooser_meth
+    respond_to do |format|
+      format.html { render :picChooser}
+    end
+  end
+
+  def leave_feedback
+    required = [:Firstname, :Lastname, :reply, :feedback_type, :message]
+    form_complete = true
+    required.each do |f|
+    if params.has_key? f and not params[f].blank?
+     # that's good news. do nothing
+    else
+      form_complete = false
+    end
+  end
+  if form_complete
+    form_status_msg = 'Thank you for your feedback!'
+  else
+    form_status_msg = 'Please fill in all the remaining form fields and resubmit.'
+ end
+   respond_to do |format|
+     format.html { render :info, locals: { status_msg: form_status_msg, feedback: params } }
+   end
+  end
+
+  def info
+   respond_to do |format|
+     format.html { render :info, locals: {feedback: {}} }
+   end
+  end
+
   def welcome
     features = [
       'Choose from premade quizzes on a variety of topics',

@@ -1,0 +1,10 @@
+<h1> Picture Chooser</h1>
+
+<%= form_with url: chooser_meth_path, local: true, method: :post do %>
+  <div>
+      <%= label_tag "Pic choice" %>
+      <%= select_tag "feedback_type", options_for_select([ "Homer", "Bart", "Lisa", "Marge" ], prompt: 'Choose a picture' %>
+  </div>
+
+  <%= submit_tag "Show Picture" %>
+<% end %>
